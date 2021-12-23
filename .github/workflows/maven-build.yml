@@ -39,40 +39,40 @@ jobs:
           name: jar-file
           path: deploy_artifacts.zip
         
-  # test:
-  #   runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
     
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0       
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0       
 
-  #     - name: Set up JDK 11
-  #       uses: actions/setup-java@v2
-  #       with:
-  #         java-version: '11'
-  #         distribution: 'adopt'
-  #         cache: maven
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: maven
 
-  #     - name: Cache SonarCloud packages
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ~/.sonar/cache
-  #         key: ${{ runner.os }}-sonar
-  #         restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
-  #     - name: Cache Maven packages
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ~/.m2
-  #         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-  #         restore-keys: ${{ runner.os }}-m2
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
-  #     - name: Build and analyze
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devopsfundamentals
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devopsfundamentals
       
   
   deploy:
@@ -80,7 +80,8 @@ jobs:
     needs: [build]
     env:
       Region: us-east-1
-      S3Folder: githubactions3
+      S3Bucket: cnbdevopsfundamentals
+      S3Folder: githubactions
     permissions:
       id-token: write
       contents: read
@@ -94,13 +95,13 @@ jobs:
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::667493128782:role/GItHubNewAssumeRole
+          role-to-assume: arn:aws:iam::286144240398:role/AssumeRoleForGithubUsers
           aws-region: ${{ env.Region }}
           
       - name: deploy to S3
         run: |
           ls
-          aws s3 cp *.zip s3://octank-config-rules/${{ env.S3Folder }}/
+          aws s3 cp *.zip s3://${{ env.S3Bucket }}/${{ env.S3Folder }}/
           
       - name: CodeDeploy to EC2
         id: deploy
@@ -109,5 +110,5 @@ jobs:
             --application-name Git_application \
             --deployment-group-name dg_Git_Application \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --s3-location bucket=octank-config-rules,bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
+            --s3-location bucket=${{ env.S3Bucket }},bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
             # --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
