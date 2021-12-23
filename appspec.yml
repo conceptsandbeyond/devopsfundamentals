@@ -1,0 +1,9 @@
+version: 0.0
+os: linux
+files:
+  - source: target/
+    destination: /home/ec2-user/student3/
+hooks:
+  ApplicationStart:
+   - location: run.sh
+     runas: root
