@@ -4,6 +4,9 @@ files:
   - source: target/
     destination: /home/ec2-user/student3/
 hooks:
+  ApplicationStop:
+  - location: stop.sh
+    runas: root
   AfterInstall:
    - location: setup.sh
      runas: root

@@ -30,7 +30,7 @@ jobs:
       - name: Create Artifacts
         run: |
           sudo apt-get install zip
-          zip deploy_artifacts.zip target/*.jar appspec.yml run.sh setup.sh
+          zip deploy_artifacts.zip target/*.jar appspec.yml run.sh setup.sh stop.sh
           
 
       - name: Upload Artifacts
