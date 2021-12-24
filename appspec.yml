@@ -4,7 +4,7 @@ files:
   - source: target/
     destination: /home/ec2-user/student3/
 hooks:
-  BeforeInstall:
+  AfterInstall:
    - location: setup.sh
      runas: root
   ApplicationStart:
