@@ -81,7 +81,7 @@ jobs:
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions
+      S3Folder: githubactions1
     permissions:
       id-token: write
       contents: read
