@@ -27,13 +27,11 @@ jobs:
       - name: Build with Maven Wrapper
         run: ./mvnw clean -B package
         
-  Upload:
+  upload:
   runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-
-  
  
       - name: Create Artifacts
         run: |
@@ -62,7 +60,7 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
-  SonarAnalysis:
+  analyze:
   runs-on: ubuntu-latest
     
     steps:
