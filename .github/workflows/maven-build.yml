@@ -27,18 +27,11 @@ jobs:
       - name: Build with Maven Wrapper
         run: ./mvnw clean -B package
         
-  upload:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
- 
       - name: Create Artifacts
         run: |
           sudo apt-get install zip
           zip deploy_artifacts.zip target/*.jar appspec.yml run.sh setup.sh stop.sh
           
-
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
