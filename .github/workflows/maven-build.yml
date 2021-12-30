@@ -23,10 +23,18 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
-
+  
       - name: Build with Maven Wrapper
         run: ./mvnw clean -B package
         
+  Upload:
+  runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+  
+ 
       - name: Create Artifacts
         run: |
           sudo apt-get install zip
@@ -54,9 +62,16 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
+  SonarAnalysis:
+  runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
+        
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
