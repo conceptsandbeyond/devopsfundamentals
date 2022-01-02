@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "command to stop java"
+sudo kill -9 $(sudo lsof -t -i:9090)

@@ -13,7 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -81,7 +80,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devopsfundamentals
       
   
-  deploy:
+  upload:
     runs-on: ubuntu-latest
     needs: [analyze]
     env:
@@ -109,6 +108,26 @@ jobs:
           ls
           aws s3 cp *.zip s3://${{ env.S3Bucket }}/${{ env.S3Folder }}/
           
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [upload]
+    env:
+      Region: us-east-1
+      S3Bucket: cnbdevopsfundamentals
+      S3Folder: githubactions1
+    permissions:
+      id-token: write
+      contents: read
+      
+    steps:
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::286144240398:role/AssumeRoleForGithubUsers
+          aws-region: ${{ env.Region }}
+          
+          
       - name: CodeDeploy to EC2
         id: deploy
         run: |
@@ -117,4 +136,3 @@ jobs:
             --deployment-group-name CnBDevOpsDG \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --s3-location bucket=${{ env.S3Bucket }},bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
-            # --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
