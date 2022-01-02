@@ -5,7 +5,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/* ]
   pull_request:
     branches: [ main ]
 
@@ -13,7 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -23,7 +22,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
-
+  
       - name: Build with Maven Wrapper
         run: ./mvnw clean -B package
         
@@ -32,7 +31,6 @@ jobs:
           sudo apt-get install zip
           zip deploy_artifacts.zip target/*.jar appspec.yml run.sh setup.sh stop.sh
           
-
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -41,7 +39,7 @@ jobs:
         
   test:
     runs-on: ubuntu-latest
-    
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -54,9 +52,16 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
+  analyze:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v2
+      
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
+        
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
@@ -75,9 +80,9 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devopsfundamentals
       
   
-  deploy:
+  upload:
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [analyze]
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
@@ -103,6 +108,26 @@ jobs:
           ls
           aws s3 cp *.zip s3://${{ env.S3Bucket }}/${{ env.S3Folder }}/
           
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [upload]
+    env:
+      Region: us-east-1
+      S3Bucket: cnbdevopsfundamentals
+      S3Folder: githubactions1
+    permissions:
+      id-token: write
+      contents: read
+      
+    steps:
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::286144240398:role/AssumeRoleForGithubUsers
+          aws-region: ${{ env.Region }}
+          
+          
       - name: CodeDeploy to EC2
         id: deploy
         run: |
@@ -111,4 +136,3 @@ jobs:
             --deployment-group-name CnBDevOpsDG \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --s3-location bucket=${{ env.S3Bucket }},bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
-            # --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
