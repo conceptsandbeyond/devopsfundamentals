@@ -85,7 +85,7 @@ jobs:
     needs: [analyze]
     env:
       Region: us-east-1
-      S3Bucket: cnbdevopsfundamentals
+      S3Bucket: cnbdevopsfundamentals!!
       S3Folder: githubactions1
     permissions:
       id-token: write
