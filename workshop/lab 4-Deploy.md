@@ -181,6 +181,6 @@ from your cloud9 terminal run the following command to get the PublicIP of the d
 
  **you can view it at below url. Change the port number to match with your port number.**
 
-http://54.173.148.82:9090/
+http://54.211.147.170:9090/
 
   ![](static/lab4-5.png)
