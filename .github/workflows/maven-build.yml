@@ -136,3 +136,4 @@ jobs:
             --deployment-group-name CnBDevOpsDG \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --s3-location bucket=${{ env.S3Bucket }},bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
+            
