@@ -38,18 +38,7 @@ i.e.
 ## **Add Upload Phase**
 1. You will now add the upload phase to your pipeline. This phase is optional and can be used to upload your artifacts to the artifacts repository. 
 2. In our example we are going to use Amazon S3 to store artifacts. 
-    Read more about how to connect to AWS from GitHub Actions - https://github.com/aws-actions/configure-aws-credentials 
 3. You will add Following yml code in your .github/workflows/build.yml file
-
-**Replace S3Folder parameter. Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
-S3Folder: githubactions`<your team number>`</p>
-
->e.g.</p>
->student1 will have  `S3Folder: githubactions1`</p>
->student2 will have  `S3Folder: githubactions2`</p>
->student3 will have  `S3Folder: githubactions3`</p>
->student4 will have  `S3Folder: githubactions4`</p>
-
 ```
 upload:
     runs-on: ubuntu-latest
@@ -81,20 +70,16 @@ upload:
 ```
 
 <br>
+To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
 
+```
+cd /home/ec2-user/environment/devopsfundamentals
+#To make sure you are at project root directory
+cp labs/lab4.1-upload.yml .github/workflows/build.yml
+# Open your build.yml file and review contents of your files
+```
 
-4. Push the code
-
-5. Check github actions workflow to see the Upload phase added
-
-
-## **Add Deploy Phase**
-1. AWS provides virtual servers to host applications.
-2. In this phase you can deploy the application to any destination of your choice
- In this example we are going to use AWS CodeDeploy to handle our deployment to Amazon EC2 servers. Open your .github/workflows/build.yml file.
-3. Add the following yml code in your .github/workflows/build.ymlfile.
-
-**rename the S3Folder section to match with your number </p> Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
+**Open your build.yml file and rename the S3Folder section to match with your number </p> Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
 S3Folder: githubactions`<your team number>`</p>
 
 >e.g.</p>
@@ -102,6 +87,28 @@ S3Folder: githubactions`<your team number>`</p>
 >student2 will have  `S3Folder: githubactions2`</p>
 >student3 will have  `S3Folder: githubactions3`</p>
 >student4 will have  `S3Folder: githubactions4`</p>
+
+4. Push the code
+```
+git add .
+git commit -m "adding upload action"
+git push 
+```
+>*username - enter your username* </p>
+>*password - enter the Personal access token provided to you.*
+
+<br>
+
+5. Check github actions workflow to see the Upload phase added
+
+    ![](static/lab4-3.png)
+
+
+## **Add Deploy Phase**
+1. AWS provides virtual servers to host applications.
+2. In this phase you can deploy the application to any destination of your choice
+ In this example we are going to use AWS CodeDeploy to handle our deployment to Amazon EC2 servers. Open your .github/workflows/build.yml file.
+3. You will add the following yml code in your .github/workflows/build.ymlfile.
 
 
 ```
@@ -135,11 +142,36 @@ deploy:
 ```
 
 <br>
+To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
 
+```
+cd /home/ec2-user/environment/devopsfundamentals
+#To make sure you are at project root directory
+cp labs/lab4.2-deploy.yml .github/workflows/build.yml
+# Open your build.yml file and review contents of your files
+```
+
+**Open your build.yml file and rename the S3Folder section to match with your number </p> Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
+S3Folder: githubactions`<your team number>`</p>
+
+>e.g.</p>
+>student1 will have  `S3Folder: githubactions1`</p>
+>student2 will have  `S3Folder: githubactions2`</p>
+>student3 will have  `S3Folder: githubactions3`</p>
+>student4 will have  `S3Folder: githubactions4`</p>
 
 4. Push the code
+```
+git add .
+git commit -m "adding Deploy action"
+git push 
+```
+>*username - enter your username* </p>
+>*password - enter the Personal access token provided to you.*
 
 5. Check github actions workflow to see the Deploy phase added
+
+   ![](static/lab4-4.png)
 
 **Congratulations, your application is now deployed.**
 

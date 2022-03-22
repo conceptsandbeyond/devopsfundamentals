@@ -12,55 +12,52 @@ In this lab you will set up the continuous testing and analysis steps for your C
 
 ## **Add Continuous Testing**
 1. You will now add continuous testing to your pipeline. In this step you would want to continuously test the automated tests you create as you build new features
-2. In our example we are going to run unit tests. 
-3. We will need to modify .github/workflows/build.yml file and add the following code at the end of the file.
-```
-test:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0       
+2. For our example you can run unit tests. 
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2g
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
+3. After modifying your build.yml file, push the code
 
-    - name: Build with Maven Wrapper
-        run: ./mvnw test
-```
+4. Check github actions workflow to see the continuous testing step added
+
+<br><br>
+
+## **Add Test code coverage using SonarCloud**
+
+Spend 5 mins reviewing Sonarcloud here - https://sonarcloud.io/features
+
 <br>
-To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
+To add SonarCube analysis for your project, you will need to follow these three steps.
+
+Step 1 - (Skip - Its already done for this project)
+
+Create a GitHub Secret
+
+In your GitHub repository, go to Settings > Secrets and create a new secret with the following details:
 
 ```
-cd /home/ec2-user/environment/devopsfundamentals
-#To make sure you are at project root directory
-cp labs/lab2.1-test.yml .github/workflows/build.yml
-# Open your build.yml file and review contents of your files
+
+In the Name field, enter SONAR_TOKEN 
+In the Value field, enter ***********
+
+```
+<br><br>
+Step 2 - (check if its done in your branch. If not, do it)
+
+Update your pom.xml file with the following properties:
+
 ```
 
-4. Push the code
+<properties>
+  <sonar.organization>conceptsandbeyond-git</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
+
 ```
-git add .
-git commit -m "adding build action"
-git push 
-```
->*username - enter your username* </p>
->*password - enter the Personal access token provided to you.*
+<br><br>
+Step 3 - (your task) - 10 mins
+Create or update your .github/workflows/build.yml
+Here is a base configuration to run a SonarCloud analysis on your master branch and Pull Requests. If you already have some GitHub Actions, you might want to just add some of these new steps to an existing one.
 
-5. Check github actions workflow to see the continuous testing step added
 
-     ![](static/lab2-1.png)
-
-## **Add Analysis Step**
-1. Sonar cloud project is already configured for your repository.  See [here](https://sonarcloud.io/) for more details on how to configure Sonar
-2. In this example we are going to use maven to submit the application for Sonar analysis. 
-
-3.  We will need to modify .github/workflows/build.yml file and add the following code at the end of the file.
 ```
  analyze:
     runs-on: ubuntu-latest
@@ -90,27 +87,9 @@ git push
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devsecops-labs
 ```
 <br>
-To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
 
-```
-cd /home/ec2-user/environment/devopsfundamentals
-# to make sure you are at project root directory
-cp labs/lab2.2-analyze.yml .github/workflows/build.yml
-# Open your build.yml file and review contents of your files
-```
+* Save the file
 
-4. Push the code
-```
-git add .
-git commit -m "adding Analyze action"
-git push 
-```
->*username - enter your username* </p>
->*password - enter the Personal access token provided to you.*
+* Push the code
 
-
-5. Check github actions workflow to see the continuous testing step added
-
-      ![](static/lab2-2.png)
-
-
+* Check github actions workflow to see the continuous testing step added
