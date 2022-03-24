@@ -14,7 +14,9 @@ checkout your feature branch first.
 ```
 git checkout feature/Student<team number>
 ```
-<br>    
+<br>
+<br>
+
 Following command need to be run in your Cloud9 Environment
 1. Start setting up GitHub actions by creating .github/workflow folder. Go to the root of your project directory and run following commands.
 ```
