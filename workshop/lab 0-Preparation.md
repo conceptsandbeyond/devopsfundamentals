@@ -16,7 +16,7 @@
 
    ![](static/lab0-2.png)
 
-8. Click on Settings wheel in the directory and click on show hidden files.</p>
+8. You would want to see hidden files. <br>Click on Settings wheel in the directory and ensure Show hidden files is checked.</p>
 
    ![](static/lab0-3.png)
 
@@ -34,7 +34,7 @@ cd devopsfundamentals/
 
 ```
 
-2. Create a new feature branch based on the base branch.Change Student0 to match with your login username (Team number). Run following commands in your terminal window.
+2. Create a new feature branch based on the base branch. <br>Change Student<team number> to match with your login username (Team number). <br>Run following commands in your terminal window.
 
 ```
  git checkout base

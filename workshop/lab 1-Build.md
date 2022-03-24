@@ -66,11 +66,11 @@ Learn more about the syntax of the yaml file [here](https://docs.github.com/en/a
 
 
 * Your first github action workflow is now ready to run. Commit the changes and push.
-run following commands in your terminal
+run following commands in your terminal. Change the <team Number> to match with your team.
 ```
 git add .
 git commit -m "adding build action"
-git push --set-upstream origin feature/Student0
+git push --set-upstream origin feature/Student<team Number>
 ```
  <span style="color:red">Change the branch name to match with the branch that you created in lab 0.</span>
 
