@@ -41,15 +41,6 @@ i.e.
     Read more about how to connect to AWS from GitHub Actions - https://github.com/aws-actions/configure-aws-credentials 
 3. You will add Following yml code in your .github/workflows/build.yml file
 
-**Replace S3Folder parameter. Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
-S3Folder: githubactions`<your team number>`</p>
-
->e.g.</p>
->student1 will have  `S3Folder: githubactions1`</p>
->student2 will have  `S3Folder: githubactions2`</p>
->student3 will have  `S3Folder: githubactions3`</p>
->student4 will have  `S3Folder: githubactions4`</p>
-
 ```
 upload:
     runs-on: ubuntu-latest
@@ -82,6 +73,18 @@ upload:
 
 <br>
 
+**Replace S3Folder parameter. Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
+S3Folder: githubactions`<your team number>`</p>
+
+>e.g.</p>
+>student1 will have  `S3Folder: githubactions1`</p>
+>student2 will have  `S3Folder: githubactions2`</p>
+>student3 will have  `S3Folder: githubactions3`</p>
+>student4 will have  `S3Folder: githubactions4`</p>
+
+
+
+<br>
 
 4. Push the code
 
@@ -93,15 +96,6 @@ upload:
 2. In this phase you can deploy the application to any destination of your choice
  In this example we are going to use AWS CodeDeploy to handle our deployment to Amazon EC2 servers. Open your .github/workflows/build.yml file.
 3. Add the following yml code in your .github/workflows/build.ymlfile.
-
-**rename the S3Folder section to match with your number </p> Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
-S3Folder: githubactions`<your team number>`</p>
-
->e.g.</p>
->student1 will have  `S3Folder: githubactions1`</p>
->student2 will have  `S3Folder: githubactions2`</p>
->student3 will have  `S3Folder: githubactions3`</p>
->student4 will have  `S3Folder: githubactions4`</p>
 
 
 ```
@@ -136,6 +130,16 @@ deploy:
 
 <br>
 
+**rename the S3Folder section to match with your number </p> Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
+S3Folder: githubactions`<your team number>`</p>
+
+>e.g.</p>
+>student1 will have  `S3Folder: githubactions1`</p>
+>student2 will have  `S3Folder: githubactions2`</p>
+>student3 will have  `S3Folder: githubactions3`</p>
+>student4 will have  `S3Folder: githubactions4`</p>
+
+<br>
 
 4. Push the code
 
