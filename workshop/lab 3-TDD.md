@@ -235,3 +235,13 @@ This returns the number itself if none of the conditions match.
 15. Go ahead and run your test cases and they should all Pass.
 
 Congratulations, you have completed your programming task using TDD approach
+
+# Now it's your challange... Try TDD for the Palindrome example below #
+```
+- Create a palindrome checker
+- It should be able to detect that a string is a palindrome: that is, it is the same word or phrase in reverse.
+- Words like "mom" are palindromes
+- Words like "bill" aren't palindromes
+- It should still know that something is a palindrome, even if the casing is off. So that means that "Mom" is still a palindrome.
+- It should also be able to detect palindromes in phrases like "Was It A Rat I Saw" and "Never Odd or Even" too.
+```
