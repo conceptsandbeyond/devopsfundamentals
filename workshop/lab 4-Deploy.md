@@ -30,8 +30,8 @@ change to </p>
 i.e. 
   *student1* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
   *student2* - `sudo kill -9 $(sudo lsof -t -i:9092)` </p>
-  *student3* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
-  *student4* - `sudo kill -9 $(sudo lsof -t -i:9092)` and so on
+  *student3* -  `sudo kill -9 $(sudo lsof -t -i:9093)` </p>
+  *student4* - `sudo kill -9 $(sudo lsof -t -i:9094)` and so on
 
     ![](static/lab4-2.png)
 
