@@ -44,7 +44,7 @@ i.e.
 ```
 upload:
     runs-on: ubuntu-latest
-    needs: [analyze]
+    needs: [test] # Verify the job name, make sure you specify the job that exists in your workflow 
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
@@ -82,6 +82,8 @@ S3Folder: githubactions`<your team number>`</p>
 >student3 will have  `S3Folder: githubactions3`</p>
 >student4 will have  `S3Folder: githubactions4`</p>
 
+**Verify that dependency is set to valid job**
+needs: [test] # Verify the job name, make sure you specify the job that exists in your workflow
 
 
 <br>
