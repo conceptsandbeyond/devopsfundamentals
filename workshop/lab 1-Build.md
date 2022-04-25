@@ -15,57 +15,13 @@ Read instructions on creating new workflows using Github Actions here -
 https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#create-an-example-workflow
 
 
-<br>
-For our example. <br>
-Name your yaml file as “build.yml” and use following content </p>
-
-**build.yml**
-```
-name: Java CI with Maven
-
-on:
-  push:
-    branches: [ main, feature/* ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
-  
-      - name: Build with Maven Wrapper
-        run: ./mvnw clean -B package
-        
-      - name: Create Artifacts
-        run: |
-          sudo apt-get install zip
-          zip deploy_artifacts.zip target/*.jar appspec.yml run.sh setup.sh stop.sh
-          
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: jar-file
-          path: deploy_artifacts.zip
-
-```         
+<br>     
 <mark> <b>Remember to Save the file.</b>
-
-Your new GitHub Actions workflow is now installed for your repository and will run automatically each time someone pushes a change to the repository. 
 
 Learn more about the syntax of the yaml file [here](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
 
 
-* Your first github action workflow is now ready to run. Commit the changes and push.
+*Commit the changes and push.
 run following commands in your terminal. Change the <team Number> to match with your team.
 ```
 git add .
