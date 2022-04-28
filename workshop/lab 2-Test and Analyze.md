@@ -10,9 +10,13 @@ In this lab you will set up the continuous testing and analysis steps for your C
 
 * That you have one successful GitHub Actions workflow run.
 
+# Test Phase #
 ## **Add Continuous Testing**
 1. You will now add continuous testing to your pipeline. In this step you would want to continuously test the automated tests you create as you build new features
+ 
 2. For our example you can run unit tests. 
+
+      Unit testing command that you want to add is -  run: ./mvnw test
 
 3. After modifying your build.yml file, push the code
 
@@ -20,6 +24,9 @@ In this lab you will set up the continuous testing and analysis steps for your C
 
 <br><br>
 
+After adding the Test phase, you can continue adding the following phase.
+
+# Analyze Phase #
 ## **Add Test code coverage using SonarCloud**
 
 Spend 5 mins reviewing Sonarcloud here - https://sonarcloud.io/features
