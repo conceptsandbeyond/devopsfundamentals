@@ -16,7 +16,7 @@ In this lab you will set up the continuous testing and analysis steps for your C
  
 2. For our example you can run unit tests. 
 
-      Unit testing command that you want to add is -  run: ./mvnw test
+      Unit testing command for our example -  run: ./mvnw test
 
 3. After modifying your build.yml file, push the code
 
@@ -26,7 +26,7 @@ In this lab you will set up the continuous testing and analysis steps for your C
 
 After adding the Test phase, you can continue adding the following phase.
 
-# Analyze Phase #
+# Analyze Phase (Optional) #
 ## **Add Test code coverage using SonarCloud**
 
 Spend 5 mins reviewing Sonarcloud here - https://sonarcloud.io/features
