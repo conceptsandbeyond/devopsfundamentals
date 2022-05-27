@@ -70,7 +70,7 @@ jobs:
       - name: Build with Maven Wrapper
         run: ./mvnw test
 
-    test3:
+  test3:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
