@@ -42,12 +42,3 @@ for password enter the Personal access token provided to you*
 
 Move on to the next lab to add the subsequent actions.
 
-
-
-
-
-
-
-
-
-
