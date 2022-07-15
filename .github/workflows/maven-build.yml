@@ -135,5 +135,6 @@ jobs:
             --application-name CnBDevOpsApp \
             --deployment-group-name CnBDevOpsDG \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --ignore-application-stop-failures \
             --s3-location bucket=${{ env.S3Bucket }},bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
             
