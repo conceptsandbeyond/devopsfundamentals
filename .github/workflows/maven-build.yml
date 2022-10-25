@@ -1,8 +1,8 @@
 name: Java CI with Maven
 
 on:
-  # push:
-  #   branches: [ main, feature/* ]
+  push:
+    branches: [ main, feature/* ]
   pull_request:
     branches: [ main ]
 
