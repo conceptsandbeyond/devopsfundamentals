@@ -1,21 +1,17 @@
-# DevOps Practitioner Lab 2a (~30 minutes)
+# DevOps Practitioner Lab 2b (~30 minutes)
 
-## Setting up Jobs to run concurrently
+## Share files across the jobs
 
 <br><br>
 
-Add 3 Test jobs to run in parallel after the build phase. Make sure that the Analyze phase runs after all the test jobs are completed
-<br><br>
+Create Artifacts in Build phase and pass is to the upload phase
 
-   ![](static/lab2a.png)
-
-<br>
+* Build - Create Artifacts using the jar files.
+* Upload - Dowload Artifacts created in Build phase and list 
 
 
+<br> <br>
 
-
-Login to GitHub and open url - <https://github.com/conceptsandbeyond/devopsfundamentals>
-Click on Actions tab
 
 
 
