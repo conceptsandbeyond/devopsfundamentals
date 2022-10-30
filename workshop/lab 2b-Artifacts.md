@@ -4,14 +4,13 @@
 
 <br><br>
 
-Create Artifacts in Build phase and pass is to the upload phase
+Create Artifacts in the Build job and pass it to the upload job
 
-* Build - Create Artifacts using the jar files.
-* Upload - Dowload Artifacts created in Build phase and list 
+* Build - Create Artifacts for the jar files
+* Upload - Dowload Artifacts created in Build phase and list
 
 
 <br> <br>
-
 
 
 
