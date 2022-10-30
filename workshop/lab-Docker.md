@@ -1,6 +1,6 @@
 # Docker Labs (~30 minutes)
 
-## Lab - Using existing image to launch container
+## Lab - Using existing image to launch a container
 
 <br>
 
